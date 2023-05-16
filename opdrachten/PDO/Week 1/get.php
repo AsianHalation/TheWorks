@@ -4,7 +4,11 @@
     $email = $_GET["email"];
     $leeftijd = $_GET["leeftijd"];
     $adres = $_GET["adres"];
+
+    echo "$naam .$Achternaam .$email .$leeftijd .$adres";
 ?>
+
+
 
 <!DOCTYPE HTML>
 <html lang="en">

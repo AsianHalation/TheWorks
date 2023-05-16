@@ -1,0 +1,3 @@
+Leg ten slotte het even uit wat het verschil is tussen POST en GET method?
+
+GET print de ingevoerde gegevens uit en wordt weergegeven op het scherm en Post niet 

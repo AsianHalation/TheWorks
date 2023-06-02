@@ -37,21 +37,38 @@
         ?>
 
         <!--Maak een nieuw formulier aan in je insert.php file met een POST method -->
-        <form emthod="POST" action="insert.php">
+        <form method="POST" action="insert.php">
 
             <!--Voeg 3 input fields in je formulier en een button-->
-            product_naam: <input type="text" name="product"><br>
-            prijs_per_stuk: <input type="float" name="prijs"><br>
+            product_naam: <input type="text" name="product_naam"><br>
+            prijs_per_stuk: <input type="float" name="prijs_per_stuk"><br>
             omscrijving: <input type="text" name="omschrijving"><br>
 
-            <input type="submit" value="Voltooien">
+            <input type="submit" value="Voltooien" name="Voltooien">
 
         </form>
 
         <!--Schrijf daarna je PHP code zodat er een product wordt toegevoegd in de tabel producten met de gegevens die in het formulier worden ingevuld -->
         <?php
-            $sql = "INSERT INTO producten (product_naam, prijs_per_stuk, omschrijving) VALUES (?,?,?)";
-            $stmt= $pdo->prepare($sql);
+
+             if (isset($_POST["Voltooien"])) {
+                $sql = "INSERT INTO `producten` (`product_code`. `product_naam`. `prijs_per_stuk`. `omschrijving`) VALUES (NULL, :product_naam, :prijs_per_stuk, :omschrijving)";
+                $stmt = $pdo->prepare($sql);
+                
+                $data = [
+                    "product_naam" => $_POST['product_naam'],
+                    "prijs_per_stuk" => $_POST['prijs_per_stuk'],
+                    "omschrijving" => $_POST['omschrijving']
+                ];
+                $stmt->execute($data);
+            }
+
+            $stmt = $pdo->query("SELECT * FROM winkel.producten");
+            $result = $stmt->fetchAll();
+
+            foreach ($result as $row) {
+                echo $row['$product_code'] . "" .$row['product_naam'] . "" . $row['prijs_per_stuk'] . $row['omschrijving'] . "<br>";
+            }
         ?>
 
     </body>
